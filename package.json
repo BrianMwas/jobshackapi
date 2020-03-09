@@ -1,0 +1,53 @@
+{
+  "name": "farmbox",
+  "version": "1.0.0",
+  "description": "backend server for the webapp farmbox",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node src/app.js",
+    "build": "NODE_ENV=production node src/app.js",
+    "deploy-staging": "",
+    "unit": "mocha tests/unit/ --watch --recursive --ui bdd --reporter spec --slow 900",
+    "intergration": "mocha tests/intergration/ --watch --ui bdd --reporter spec --slow 900"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:github/BrianMwas"
+  },
+  "keywords": [
+    "Job website api",
+    "Rest api",
+    "rest api testing"
+  ],
+  "author": "Brian Mwangi",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "email-templates": "^6.0.3",
+    "express": "^4.16.4",
+    "filestack-js": "^3.11.2",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.5.7",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "pm2": "^4.2.3"
+  },
+  "devDependencies": {
+    "autofixture": "^1.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.0",
+    "sinon": "^7.4.2",
+    "sinon-mongoose": "^2.3.0",
+    "winston": "^3.2.1"
+  }
+}
