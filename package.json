@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
-    
     "start": "node app.js --env production ",
     "deploy-staging": "",
     "unit": "mocha tests/unit/ --watch --recursive --ui bdd --reporter spec --slow 900",
@@ -38,7 +37,8 @@
     "mongoose": "^5.5.7",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
-    "pm2": "^4.2.3"
+    "pm2": "^4.2.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "autofixture": "^1.1.0",
@@ -47,7 +47,6 @@
     "mocha": "^6.1.4",
     "nodemon": "^1.19.0",
     "sinon": "^7.4.2",
-    "sinon-mongoose": "^2.3.0",
-    "winston": "^3.2.1"
+    "sinon-mongoose": "^2.3.0"
   }
 }
