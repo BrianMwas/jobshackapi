@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     
-    "start": "node src/app.js --env production ",
+    "start": "node app.js --env production ",
     "deploy-staging": "",
     "unit": "mocha tests/unit/ --watch --recursive --ui bdd --reporter spec --slow 900",
     "intergration": "mocha tests/intergration/ --watch --ui bdd --reporter spec --slow 900"
