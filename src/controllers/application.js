@@ -28,15 +28,39 @@ exports.show = function (req, res, next) {
         });
     };
 
-    Application.findOne({_id: req.params.applicationId})
+    console.log("application found by Id", req.params.applicationId);
+
+    Application.findById(req.params.applicationId)
+    .populate({
+        path: 'user',
+        populate: {
+            path: 'profile'
+        },
+        populate: {
+            path: 'qualification'
+        }
+    })
+    .populate('job')
     .then(application => {
         if(!application) {
             res.status(409).json({
                 message : "Application info not found"
             })
         }
-        req.resources.application = application;
-        next();
+
+        application.status = 'processed';
+
+        application.save()
+        .then(newApp => {
+            console.log("wait", newApp)
+            delete newApp.user;
+            newApp.user = req.resources.user;
+            req.resources.application = newApp;
+            next();
+        })
+        .catch(error => {
+            next(error)
+        })
     })
     .catch(error => {
         next(error);
@@ -44,16 +68,16 @@ exports.show = function (req, res, next) {
 }
 
 exports.getAll = function (req, res, next) {
-    let query ={
-        job : req.params.jobId
-    };
+    
 
     if(req.query.applicationStatus) {
         query.status = req.query.application.status;
     }
 
-
-    Application.find(query)
+    Application.find({})
+    .where('job', req.params.jobId)
+    .populate('user')
+    .populate('job')
     .exec()
     .then(applications => {
         req.resources.applications = applications;

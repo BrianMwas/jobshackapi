@@ -110,16 +110,21 @@ exports.show = function(req, res, next) {
      })
 }
 
-exports.jobsByCategory = function(req, res, next) {
-	let { industry, type, country } = req.query;
-
-	Job.find({})
-	.where('industry').eq(industry)
-	.where('type', type)
-	.where('country', country)
+exports.category= function(req, res, next) {
+	let { industry, jobtype, country } = req.query;
+ 
+	Job.find({ })
+  .or([ 
+    { country }, 
+    { industry }, 
+    { type: jobtype }
+  ])
+  .where('deleted', false)
+  .select('-deleted')
+  .populate('company')
 	.then(results => {
 		if(results.length <= 0) {
-			res.json({
+			return res.json({
 				success: true,
 				message: "We could not find any"
 			})
@@ -128,10 +133,10 @@ exports.jobsByCategory = function(req, res, next) {
 		req.resources.jobListing = results;
 		next();
 	}).catch(error => {
-		if(error.name == 'MongoError' && error.code === 11000) {
-          return res.status(422).json({
+		  if(error.name == 'MongoError' && error.code === 11000) {
+          return res.status(409).json({
             success: false,
-            message: error.errors[message]
+            message: [err.message]
           })
         }
         res.status(500).json({
@@ -166,7 +171,7 @@ exports.index = function(req, res, next) {
             })
         } 
         req.resources.jobs = jobs;
-        console.log(req.resources.jobs)
+        
         next()
     })
     .catch(error => {

@@ -32,4 +32,5 @@ let ApplicationSchema = new Schema({
         versionKey: false
     });
 
+
 module.exports = mongoose.model('Application', ApplicationSchema);

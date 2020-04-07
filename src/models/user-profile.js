@@ -12,6 +12,7 @@ let UserProfileSchema = new Schema({
 	docPath: String,
 	username: String,
 	telephone: String,
+	description: String,
 	role: {
 		type: String,
 		required: true,

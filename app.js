@@ -21,7 +21,7 @@ const routes = require('./src/routes')
 const error= require('./src/routes/subroutes/errors')
 const PORT = config.port;
 
-if(ENV === 'production') {
+if(ENV == 'development') {
     const winston = require('winston');
 
     let logger = new winston.createLogger({
@@ -51,17 +51,22 @@ if(ENV === 'production') {
             logger.info(message);
         }
     };
+
+
+
+    app.use(morgan("dev", {
+        skip: function(req, res) { return res.statusCode < 400;}
+    }));
+
+    app.use(morgan('combined', {
+        "stream": logger.stream
+        }
+    ));
 }
-
-
-
-
-
 
 
 //constants in the environment.
 const db = config.mongodb.uri
-console.log("db", db)
 mongoose.Promise = global.Promise
 
 mongoose.connect(db, {
@@ -89,19 +94,6 @@ app.use(compression())
 app.use(bodyparser.urlencoded({ extended : true }))
 app.use(bodyparser.json())
 app.use(express.static(path.join(__dirname, '..', 'public')))
-
-
-
-if (process.env.NODE_ENV !== 'production') {
-    app.use(morgan("dev", {
-        skip: function(req, res) { return res.statusCode < 400;}
-    }));
-
-    app.use(morgan('combined', {
-        "stream": logger.stream
-        }
-    ));
-}
 
 app.set('env', ENV);
 

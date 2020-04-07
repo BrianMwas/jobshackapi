@@ -63,8 +63,6 @@ exports.show = function(req, res, next) {
                 message: "You lack a profile"
             })
         } 
-
-        console.log("profile user", profile)
         req.resources.profile = profile;
         next();
     })

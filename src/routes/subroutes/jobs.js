@@ -19,11 +19,17 @@ module.exports = function(app) {
     )
 
 
-    app.route('/api/v1/search-jobs')
+    app.route('/api/v1/category')
+    .get(
+        controller.category,
+        response.toJSON('jobListing')
+     )
+
+    app.route('/api/v1/search')
     .get(
         controller.search,
         response.toJSON('jobs')
-     )
+        )
     
 
     app.route('/api/v1/companies/:companyId/jobs')
@@ -40,11 +46,10 @@ module.exports = function(app) {
         response.toJSON('newJob')
     )
 
-    app.route('/api/v1/companies/:companyId/jobs/:jobId')
+    app.route('/api/v1/companies/:companyId/jobs/:jobId/update')
     .put(
         auth,
         companyCtlr.show,
-        authorize.authorizeOnlyToCompanyMembers,
         controller.show,
         controller.update,
         response.toJSON('updatedJob')
