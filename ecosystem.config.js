@@ -17,14 +17,14 @@ module.exports = {
     }
   }],
 
-  deploy : {
-    production : {
-      user : 'node',
-      host : '212.83.163.1',
-      ref  : 'origin/master',
-      repo : 'github.com/BrianMwas/jobshackapi.git',
-      path : 'app.js',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
-    }
-  }
+  // deploy : {
+  //   production : {
+  //     user : 'node',
+  //     host : '212.83.163.1',
+  //     ref  : 'origin/master',
+  //     repo : 'github.com/BrianMwas/jobshackapi.git',
+  //     path : 'app.js',
+  //     'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+  //   }
+  // }
 };
