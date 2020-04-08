@@ -52,10 +52,11 @@ exports.show = function (req, res, next) {
 
         application.save()
         .then(newApp => {
-            console.log("wait", newApp)
             delete newApp.user;
             newApp.user = req.resources.user;
             req.resources.application = newApp;
+            console.log("wait", newApp)
+            
             next();
         })
         .catch(error => {

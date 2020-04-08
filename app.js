@@ -104,11 +104,19 @@ cors(app);
 routes(app);
 error(app);
 
-app.listen(PORT || DEFAULT_PORT,
+if(ENV == 'development') {
+    app.listen(PORT || DEFAULT_PORT,
     config.hostname || DEFAULT_HOSTNAME,  () => {
         console.log(`${config.app.name} is running`);
         console.log(`   listening on port: ${config.port}`)
         console.log(`   environment : ${ENV.toLowerCase()}`);
     });
+} else {
+    app.listen(PORT || DEFAULT_PORT,  () => {
+        console.log(`${config.app.name} is running`);
+        console.log(`   environment : ${ENV.toLowerCase()}`);
+    });
+}
+
 
 // module.exports = app;

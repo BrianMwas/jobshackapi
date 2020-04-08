@@ -40,7 +40,7 @@ module.exports = function(app) {
         controller.update
     )
 
-    app.route(`${VERSION}jobs:slug/:jobId/:applicationId/remove`)
+    app.route(`${VERSION}jobs/:slug/:jobId/:applicationId/remove`)
     .get(
         auth,
         companyCtlr.bySlug,
