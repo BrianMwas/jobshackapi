@@ -21,7 +21,7 @@ const terminate = require('./terminate');
 // const cors = require('./src/cors')
 const routes = require('./src/routes')
 const error= require('./src/routes/subroutes/errors')
-const PORT = config.port;
+const PORT = config.port || DEFAULT_PORT;
 
 if(ENV == 'development') {
     const winston = require('winston');
@@ -119,7 +119,7 @@ error(app);
 app.listen(PORT || DEFAULT_PORT,
     config.hostname || DEFAULT_HOSTNAME,  () => {
         console.log(`${config.app.name} is running`);
-        console.log(`   listening on port: ${config.port}`)
+        console.log(`   listening on port: ${PORT}`)
         console.log(`   environment : ${ENV.toLowerCase()}`);
     });
 
