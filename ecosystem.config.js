@@ -1,11 +1,11 @@
 module.exports = {
   apps : [{
-    name: 'API',
+    name: 'JOBSHACK',
     script: 'app.js',
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
-    instances: 1,
+    instances: 2,
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
@@ -17,14 +17,14 @@ module.exports = {
     }
   }],
 
-  // deploy : {
-  //   production : {
-  //     user : 'node',
-  //     host : '212.83.163.1',
-  //     ref  : 'origin/master',
-  //     repo : 'github.com/BrianMwas/jobshackapi.git',
-  //     path : 'app.js',
-  //     'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
-  //   }
-  // }
+  deploy : {
+    production : {
+      user : 'node',
+      host : '',
+      ref  : 'origin/master',
+      repo : 'github.com/BrianMwas/jobshackapi.git',
+      path : 'app.js',
+      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+    }
+  }
 };
