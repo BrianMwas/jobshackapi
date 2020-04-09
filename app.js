@@ -14,9 +14,10 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('./config/index');
 const helmet = require("helmet")
-const compression = require("compression")
+const compression = require("compression");
+const cors = require('cors');
 
-const cors = require('./src/cors')
+// const cors = require('./src/cors')
 const routes = require('./src/routes')
 const error= require('./src/routes/subroutes/errors')
 const PORT = config.port;
@@ -77,7 +78,7 @@ mongoose.connect(db, {
     console.log(err)
 })
 mongoose.set('useCreateIndex', true)
-
+app.use(cors());
 
 //Global variables
 app.use(function (req, res, next) {
@@ -99,7 +100,7 @@ app.set('env', ENV);
 
 
 //cors app
-cors(app);
+// cors(app);
 // Applies the express app tool to all routes
 routes(app);
 error(app);
